@@ -1,0 +1,40 @@
+# PostgreSQL. Versions 9.3 and up are supported.
+#
+# Install the pg driver:
+#   gem install pg
+# On macOS with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+# On macOS with MacPorts:
+#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
+# On Windows:
+#   gem install pg
+#       Choose the win32 build.
+#       Install PostgreSQL and put its /bin directory on your path.
+#
+# Configure Using Gemfile
+# gem "pg"
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: <%= ENV.fetch("RAILS_DB_TIMEOUT") { 5000 } %>
+  host: <%= ENV.fetch("RAILS_DB_HOST") { "localhost" } %>
+  port: <%= ENV.fetch("RAILS_DB_PORT") { "5432" } %>
+  username: <%= ENV.fetch("RAILS_DB_USER_NAME") { "postgres" } %>
+  password: <%= ENV.fetch("RAILS_DB_PASSWORD") { "postgres" } %>
+  schema_search_path: "public, shared_extensions"
+
+development:
+  <<: *default
+  database: <%= ENV.fetch("RAILS_DB_NAME") { "compayny-review" } %>
+
+test:
+  <<: *default
+  database: <%= ENV.fetch("RAILS_DB_NAME") { "compayny-review-test" } %>
+
+#production:
+#  <<: *default
+#  database: ReviewCompany_prod
+#  username: ReviewCompany
+#  password: <%#= ENV["REVIEWCOMPANY_DATABASE_PASSWORD"] %>
