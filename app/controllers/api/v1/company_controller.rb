@@ -1,0 +1,44 @@
+class Api::V1::CompanyController < ApplicationController
+
+  before_action :get_company, only: [:company_overview, :update, :delete_company]
+
+  def index
+    data = Company.all.limit(10)
+    render json: json_with_success(data: data, default_serializer: CompanySerializer)
+  end
+
+  def create
+    data = Company.create!(create_params)
+    render json: json_with_success(data: data, default_serializer: CompanySerializer)
+  end
+
+  def company_overview
+    render json: json_with_success(data: @company, default_serializer: CompanySerializer)
+  end
+
+  def update
+    @company.update!(update_params)
+    render json: json_with_success(data: @company, default_serializer: CompanySerializer)
+  end
+
+  def delete_company
+    @company.update_attribute(:is_deleted, true)
+    render json: json_with_empty_success
+  end
+
+
+  private
+
+  def get_company
+    @company = Company.find(params[:id])
+    return render json: json_with_error(message: "company not found") unless @company
+  end
+
+  def create_params
+    params.require(:company).permit(:name, :owner, :phone, :main_office, :website)
+  end
+
+  def update_params
+    params.require(:company).permit(:owner, :phone, :main_office, :website)
+  end
+end
