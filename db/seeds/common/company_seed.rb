@@ -1,0 +1,22 @@
+list_comapny = []
+10.times do
+  list_comapny.push(
+    {
+      name: Faker::Company.name,
+      owner: Faker::Name.name,
+      main_office: Faker::Address.city,
+      phone: Faker::PhoneNumber.phone_number,
+      avg_score: 1,
+      website: Faker::Internet.url,
+      company_type: "unknown",
+      company_size: Faker::Number.between(from: 1, to: 1000),
+    }
+  )
+end
+list_comapny.each do |com|
+  unless Company.exists?(name: com[:name], company_type: com[:company_type])
+    Company.create(com)
+    puts "config: #{com[:name]} created"
+  end
+end
+puts 'Company created'

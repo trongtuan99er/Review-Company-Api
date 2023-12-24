@@ -10,20 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_24_034549) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_24_050706) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "companies", force: :cascade do |t|
-    t.string "name", limit: 50, null: false
+  create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", limit: 100, null: false
     t.integer "is_active", default: 0
-    t.string "owner", limit: 50, null: false
+    t.string "owner", limit: 100, null: false
     t.string "main_office", limit: 100
-    t.string "phone", limit: 15
-    t.uuid "country_id", null: false
+    t.string "phone", limit: 30
+    t.uuid "country_id"
     t.integer "company_type", default: 0, null: false
     t.integer "company_size", default: 1, null: false
-    t.float "avg_score"
+    t.float "avg_score", default: 0.0
     t.integer "total_reviews", default: 0
     t.boolean "is_good_company", default: true
     t.string "logo", limit: 255
@@ -32,10 +33,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_24_034549) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "reviews", force: :cascade do |t|
+  create_table "reviews", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.uuid "company_id"
-    t.integer "score", default: 0, null: false
+    t.integer "score", default: 1, null: false
     t.string "title", limit: 100
     t.text "reviews_content"
     t.boolean "vote_for_quit", default: false, null: false
