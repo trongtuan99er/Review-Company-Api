@@ -10,7 +10,10 @@ module ApiRoutes
             end
           end
 
-          resources :review, only: %i[index create update destroy] do
+          resources :review, only: %i[index create update] do
+            member do
+              put :delete_review
+            end
           end
         end
       end

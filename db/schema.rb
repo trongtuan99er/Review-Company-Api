@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_24_091737) do
     t.boolean "is_anonymous", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_deleted", default: false
   end
 
 end
