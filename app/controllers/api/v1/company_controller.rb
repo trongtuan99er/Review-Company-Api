@@ -1,5 +1,5 @@
 class Api::V1::CompanyController < ApplicationController
-
+  before_action :authenticate_user!, only: [:create, :update, :company_overview, :delete_company]
   before_action :get_company, only: [:company_overview, :update, :delete_company]
 
   def index

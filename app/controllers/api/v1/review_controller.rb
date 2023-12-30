@@ -1,5 +1,5 @@
 class Api::V1::ReviewController < ApplicationController
-
+  before_action :authenticate_user!, only: [:create, :update, :delete_review]
   before_action :get_company, only: [:create, :index]
   before_action :get_review, only: [:update, :delete_review]
   before_action :validate_update, only: :update
@@ -11,6 +11,7 @@ class Api::V1::ReviewController < ApplicationController
 
   def create
     create_payload = create_params.merge!(company_id: @company.id)
+    create_payload.merge!(user_id: current_user.id)
     data = Review.create!(create_payload)
     render json: json_with_success(data: data, default_serializer: ReviewSerializer)
   end
