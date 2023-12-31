@@ -28,5 +28,6 @@ module ReviewCompany
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use config.session_store, config.session_options
     config.autoload_paths += Dir["#{config.root}/config/routes"]
+    config.active_job.queue_adapter = :sidekiq
   end
 end
