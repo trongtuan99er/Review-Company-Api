@@ -31,3 +31,5 @@
 
 en:
   hello: "Hello world"
+  errors:
+    invalid_tenant: "invalid Tenant"

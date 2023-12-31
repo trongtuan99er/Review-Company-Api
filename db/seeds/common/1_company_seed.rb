@@ -13,10 +13,15 @@ list_comapny = []
     }
   )
 end
-list_comapny.each do |com|
-  unless Company.exists?(name: com[:name], company_type: com[:company_type])
-    Company.create(com)
-    puts "config: #{com[:name]} created"
+Area.where(status: :active).each do |tenant|
+  tenant.change_tenant do
+    list_comapny.each do |com|
+      unless Company.exists?(name: com[:name], company_type: com[:company_type])
+        Company.create(com)
+        puts "config: #{com[:name]} created"
+      end
+    end
+    puts 'Company created'
   end
 end
-puts 'Company created'
+
