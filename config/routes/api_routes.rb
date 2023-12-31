@@ -23,7 +23,8 @@ module ApiRoutes
               put :delete_review
             end
           end
-        end
+
+          resources :reply_review, only: %i[index create update destroy]
       end
     end
   end
