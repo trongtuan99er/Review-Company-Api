@@ -1,6 +1,6 @@
 class CreateReplyReviews < ActiveRecord::Migration[7.0]
   def change
-    create_table :reply_reviews, id: :uuid do |t|
+    create_table :replies, id: :uuid do |t|
       t.references :review, null: false, foreign_key: true, type: :uuid
       t.uuid :user_id, null: false
       t.text :content, null: false
@@ -9,5 +9,6 @@ class CreateReplyReviews < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+    add_index :replies, [:review_id, :user_id], unique: true
   end
 end

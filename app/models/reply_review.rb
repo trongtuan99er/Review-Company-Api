@@ -1,2 +1,0 @@
-class ReplyReview < ApplicationRecord
-end
