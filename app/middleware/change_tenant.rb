@@ -14,7 +14,7 @@ class ChangeTenant < Apartment::Elevators::Generic
   # @return {String} - The tenant to switch to
   def parse_tenant_name(request)
     # request is an instance of Rack::Request
-    request.env['HTTP_X_API_TENANT'] || request.env['X_API_TENANT'] || Tenant::DEFAUSLT_SCHEMA
+    request.env['HTTP_X_API_TENANT'] || request.env['X_API_TENANT'] || Tenant::DEFAULT_SCHEMA
   end
 
   def content_type_json

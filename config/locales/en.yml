@@ -33,3 +33,13 @@ en:
   hello: "Hello world"
   errors:
     invalid_tenant: "invalid Tenant"
+
+  controller:
+    base:
+      not_found: "Not Found"
+      sucess: "success"
+      fail: "fails"
+      destroyed: "destroy done"
+      ok: "Oke"
+
+

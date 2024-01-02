@@ -21,11 +21,16 @@ module ApiRoutes
           resources :review, only: %i[index create update] do
             member do
               put :delete_review
+              put :like
+              put :dislike
+              put :unlike
             end
           end
 
-          resources :reply_review, only: %i[index create update destroy]
-      end
-    end
-  end
+          resources :reply, only: %i[index create update destroy] do
+          end
+       end
+     end
+   end
+ end
 end

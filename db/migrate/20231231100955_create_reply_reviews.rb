@@ -9,6 +9,6 @@ class CreateReplyReviews < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-    add_index :replies, [:review_id, :user_id], unique: true
+    add_index :replies, [:review_id, :user_id]
   end
 end

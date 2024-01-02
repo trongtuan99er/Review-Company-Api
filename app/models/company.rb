@@ -1,4 +1,5 @@
 class Company < ApplicationRecord
+  include BaseConcern
 
   enum company_type: {
     unknown:  0,

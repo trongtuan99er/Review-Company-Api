@@ -3,7 +3,7 @@ class CreateLikeReviews < ActiveRecord::Migration[7.0]
     create_table :likes, id: :uuid do |t|
       t.references :review, null: false, foreign_key: true, unique: true, type: :uuid
       t.uuid :user_id, null: false
-      t.boolean :status, null: false, default: 1
+      t.integer :status, null: false, default: 1
 
       t.timestamps
     end

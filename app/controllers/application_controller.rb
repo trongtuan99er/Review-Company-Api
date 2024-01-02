@@ -19,4 +19,10 @@ class ApplicationController < ActionController::API
   def authenticate_if_token_present
     auth_token && authenticate_user!
   end
+
+  def with_transaction
+    ActiveRecord::Base.transaction do
+      yield
+    end
+  end
 end
