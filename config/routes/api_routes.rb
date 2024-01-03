@@ -23,7 +23,6 @@ module ApiRoutes
               put :delete_review
               put :like
               put :dislike
-              put :unlike
             end
           end
 

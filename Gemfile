@@ -19,6 +19,10 @@ gem 'countries'
 gem 'devise-jwt'
 gem 'ros-apartment', require: 'apartment'
 
+# streaming kafka
+gem 'connection_pool'
+gem 'ruby-kafka'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
