@@ -37,13 +37,13 @@ class Api::V1::ReviewController < ApplicationController
   def dislike
     dislike_params = like_dislike_params(:dislike, @like_record, current_user.id, @review.id)
     produce_service.create(dislike_params)
-    render json: json_with_success(message: I18n.t('controller.base.sucess'))
+    render json: json_with_success(message: I18n.t('controller.base.success'))
   end
 
   private
 
   def like_dislike_params(status, like_record, user_id, review_id)
-    status = like_record&.send("#{status}?") ? :default : status
+    status = like_record&.default? ? status : :default
     {
       like_id: like_record&.id,
       action: like_record.present? ? :update : :create,

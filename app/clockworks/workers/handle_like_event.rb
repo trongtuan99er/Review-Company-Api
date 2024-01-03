@@ -7,10 +7,11 @@ class Workers::HandleLikeEvent
   end
 
   def perform payload
-    Apartment::Tenant.switch payload.tenant do
-      action = payload.action
-      Like.create(user_id: payload.user_id, review_id: payload.review_id, status: payload.status) if action == LikeEventAction::CREATE
-      Like.find_by(id: payload.like_id)&.update!(status: payload.status) if action == LikeEventAction::UPDATE
+    Apartment::Tenant.switch payload.delete("tenant") do
+      action = payload.delete("action")
+      like_id = payload.delete("like_id")
+      Like.create(payload) if action == LikeEventAction::CREATE
+      Like.find_by(id: like_id)&.update!(status: payload["status"]) if action == LikeEventAction::UPDATE
     end
     puts "event handle done!"
   end

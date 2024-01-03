@@ -14,7 +14,7 @@ module Interactors::Kafka
           event.partition)
       return unless like_payload
 
-      Workers::HandleLikeEvent.perform_async(like_payload)
+      Workers::HandleLikeEvent.perform_async(like_payload.to_h)
     end
   end
 end
