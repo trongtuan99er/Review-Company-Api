@@ -1,5 +1,7 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
   include ResponseHelper
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_role_id, only: [:create]
 
   def create
     build_resource(sign_up_params)
@@ -14,6 +16,17 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name)
+    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :phone_number, :role_id)
   end
+
+  def set_role_id
+    params[:user][:role_id] = Role.find_by(role: 'user', status: :active).id
+  end
+
+  def configure_permitted_parameters
+    added_attrs = %i[email password password_confirmation first_name last_name phone_number role_id]
+    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
+    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
+  end
+
 end
