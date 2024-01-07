@@ -36,6 +36,7 @@ en:
 
   controller:
     base:
+      not_permission: "You are not permiit to perform this action"
       not_found: "Not Found"
       success: "success"
       fail: "fails"

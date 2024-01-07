@@ -8,6 +8,7 @@ class Company < ApplicationRecord
   }
 
   validates :name, :owner, presence: true
+  validates :name, uniqueness: true
   has_many :reviews, dependent: :destroy
 
   after_commit :update_country_score, on: :update, if: -> { saved_change_to_total_reviews? }

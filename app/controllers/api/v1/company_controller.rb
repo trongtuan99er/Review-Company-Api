@@ -1,5 +1,6 @@
 class Api::V1::CompanyController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update, :company_overview, :delete_company]
+  before_action :check_role_permission, only: [:create, :update, :delete_company]
   before_action :get_company, only: [:company_overview, :update, :delete_company]
 
   def index
@@ -40,5 +41,10 @@ class Api::V1::CompanyController < ApplicationController
 
   def update_params
     params.require(:company).permit(:owner, :phone, :main_office, :website)
+  end
+
+  def check_role_permission
+    allow_action = current_user.role&.admin? || current_user.role&.owner?
+    return render json: json_with_error(message: I18n.t("controller.base.not_permission")) unless allow_action
   end
 end

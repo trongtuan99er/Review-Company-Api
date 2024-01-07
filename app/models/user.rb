@@ -5,4 +5,13 @@ class User < ApplicationRecord
 
   belongs_to :role, optional: true
   include WhoDoesIt::CurrentUserMethods
+
+  after_create :set_default_role, if: -> { role_id.nil?}
+
+  private
+
+  def set_default_role
+    self.role_id = Role.find_by(role: 'user').id
+    self.save!
+  end
 end
