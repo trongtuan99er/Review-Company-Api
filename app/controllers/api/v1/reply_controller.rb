@@ -16,7 +16,7 @@ class Api::V1::ReplyController < ApplicationController
 
   def update
     @reply.update!(reply_review_params)
-    render json_with_success(message: I18n.t("controller.base.sucessk"), data: @reply, default_serializer: ReplySerializer)
+    render json_with_success(message: I18n.t("controller.base.sucess"), data: @reply, default_serializer: ReplySerializer)
   end
 
   def destroy

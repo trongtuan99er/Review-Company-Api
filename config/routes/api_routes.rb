@@ -28,6 +28,13 @@ module ApiRoutes
 
           resources :reply, only: %i[index create update destroy] do
           end
+
+          resources :user, only: %i[index] do
+            member do
+              put :delete_user
+              put :update_profile
+            end
+          end
        end
      end
    end

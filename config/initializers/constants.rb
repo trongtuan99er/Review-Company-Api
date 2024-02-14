@@ -3,6 +3,7 @@ class SidekiqQueue
   FIND_AND_DESTROY_COMAPNY = 'find_and_destroy_company'.freeze
   FIND_AND_DESTROY_REIVEWS = 'find_and_destroy_reivews'.freeze
   HANDLE_LIKE_EVENT        =  'handle_like_event'.freeze
+  DELETE_USER              =  'delete_user'.freeze
 end
 
 class Tenant
